@@ -8,4 +8,24 @@
  *  [-2, -1, 1, 2],
  *  [-2,  0, 0, 2]
  * ]
+ * 思路：排序、递归
  */
+function findArray(arr, target, count) {
+	var result = []
+	function recurs(start, leftOver, selection) {
+		if (leftOver < 0) {
+			return
+		}
+		if (selection.length === count && leftOver === 0) {
+			result.push(selection)
+			return
+		}
+		for (var i = start; i < arr.length; i++) {
+			recurs(i, leftOver - arr[i], selection.concat(arr[i]))
+		}
+	}
+	recurs(0, target, [])
+	return result
+}
+const res = findArray([1, 2, 3, 4, 5], 7, 3)
+console.log(res)
